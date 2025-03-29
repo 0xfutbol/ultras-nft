@@ -31,6 +31,19 @@ var dnaList = new Set();
 const DNA_DELIMITER = "-";
 const HashlipsGiffer = require(`${basePath}/modules/HashlipsGiffer.js`);
 
+const {
+  HEAD_TO_HAIR_COLOR_MAP,
+  MATE_DRINKERS,
+  WORLD_CUP_CHAMPIONS,
+  VIP_DNA,
+} = require(`${basePath}/src/constants.js`);
+
+const {
+  countryShortToLong,
+  formatAttributeValue,
+  mapSkinColor,
+} = require(`${basePath}/src/functions.js`);
+
 let hashlipsGiffer = null;
 
 const buildSetup = () => {
@@ -111,6 +124,9 @@ const layersSetup = (layersOrder) => {
 };
 
 const saveImage = (_editionCount) => {
+  const jerseyAttribute = attributesList.find(attr => attr.trait_type === "Jersey");
+  const jerseyPrefix = jerseyAttribute ? jerseyAttribute.value.replace(/\s+/g, "") : "";
+
   fs.writeFileSync(
     `${buildDir}/images/${_editionCount}.png`,
     canvas.toBuffer("image/png")
@@ -133,13 +149,14 @@ const addMetadata = (_dna, _edition) => {
   let tempMetadata = {
     name: `${namePrefix} #${_edition}`,
     description: description,
-    image: `${baseUri}/${_edition}.png`,
+    // image: `${baseUri}/${_edition}.png`,
+    image: `${_edition}.png`,
     dna: sha1(_dna),
     edition: _edition,
     date: dateTime,
     ...extraMetadata,
     attributes: attributesList,
-    compiler: "HashLips Art Engine",
+    author: "0xFútbol",
   };
   if (network == NETWORK.sol) {
     tempMetadata = {
@@ -173,10 +190,78 @@ const addMetadata = (_dna, _edition) => {
 
 const addAttributes = (_element) => {
   let selectedElement = _element.layer.selectedElement;
-  attributesList.push({
-    trait_type: _element.layer.name,
-    value: selectedElement.name,
-  });
+
+  if (_element.layer.name === "Jersey") {
+    const jerseyName = selectedElement.name.slice(0, selectedElement.name.length - 1);
+    const skinColor = selectedElement.name.slice(-1);
+    attributesList.push({
+      trait_type: "Jersey",
+      value: formatAttributeValue("Jersey", jerseyName),
+    });
+    attributesList.push({
+      trait_type: "Skin",
+      value: mapSkinColor(skinColor),
+    });
+  }
+
+  else if (_element.layer.name === "Eyes") {
+    const parts = selectedElement.name.split("_");
+    const eyes = parts.slice(0, parts.length - 1).join("_");
+    const eyesMod = parts[parts.length - 1];
+
+    attributesList.push({
+      trait_type: "Eyes",
+      value: formatAttributeValue("Eyes", eyes, eyesMod),
+    });
+  }
+
+  else if (_element.layer.name === "Head") {
+    let head = selectedElement.name.slice(0, selectedElement.name.length - 1);
+    let headMod = selectedElement.name.slice(-1);
+
+    if (isNaN(Number(headMod))) {
+      head = selectedElement.name;
+      headMod = null;
+    }
+
+    attributesList.push({
+      trait_type: "Head",
+      value: formatAttributeValue("Head", head, headMod),
+    });
+  }
+
+  else if (_element.layer.name === "Mouth") {
+    let mouth = selectedElement.name.replace("_castano", "").replace("_negro", "").replace("_rubio", "");
+
+    attributesList.push({
+      trait_type: "Mouth",
+      value: formatAttributeValue("Mouth", mouth),
+    });
+  }
+
+  else if (_element.layer.name === "Object") {
+    if (selectedElement.name.startsWith("dedo_espuma")) {
+      const objectName = selectedElement.name.slice(0, selectedElement.name.length - 1);
+      const objectColor = selectedElement.name.slice(-1);
+  
+      attributesList.push({
+        trait_type: _element.layer.name,
+        value: formatAttributeValue(_element.layer.name, objectName, objectColor),
+      });
+    } else if (selectedElement.name !== "no_item") {
+      attributesList.push({
+        trait_type: _element.layer.name,
+        value: formatAttributeValue(_element.layer.name, selectedElement.name),
+      });
+    }
+  }
+
+  else {
+    attributesList.push({
+      trait_type: _element.layer.name,
+      value: formatAttributeValue(_element.layer.name, selectedElement.name),
+    });
+  }
 };
 
 const loadLayerImg = async (_layer) => {
@@ -219,11 +304,20 @@ const drawElement = (_renderObject, _index, _layersLen) => {
   addAttributes(_renderObject);
 };
 
+/**
+ * Constructs layer to DNA mapping and applies skin color distribution balancing
+ * @param {string} _dna - The DNA string
+ * @param {Array} _layers - The layers array
+ * @returns {Array} - Updated DNA and mapped layers
+ */
 const constructLayerToDna = (_dna = "", _layers = []) => {
+  let dna = _dna;
+
   let mappedDnaToLayers = _layers.map((layer, index) => {
     let selectedElement = layer.elements.find(
       (e) => e.id == cleanDna(_dna.split(DNA_DELIMITER)[index])
     );
+
     return {
       name: layer.name,
       blend: layer.blend,
@@ -231,7 +325,8 @@ const constructLayerToDna = (_dna = "", _layers = []) => {
       selectedElement: selectedElement,
     };
   });
-  return mappedDnaToLayers;
+  
+  return [dna, mappedDnaToLayers];
 };
 
 /**
@@ -281,25 +376,201 @@ const isDnaUnique = (_DnaList = new Set(), _dna = "") => {
 
 const createDna = (_layers) => {
   let randNum = [];
-  _layers.forEach((layer) => {
-    var totalWeight = 0;
-    layer.elements.forEach((element) => {
-      totalWeight += element.weight;
-    });
-    // number between 0 - totalWeight
-    let random = Math.floor(Math.random() * totalWeight);
-    for (var i = 0; i < layer.elements.length; i++) {
-      // subtract the current weight from the random weight until we reach a sub zero value.
-      random -= layer.elements[i].weight;
-      if (random < 0) {
-        return randNum.push(
-          `${layer.elements[i].id}:${layer.elements[i].filename}${
-            layer.bypassDNA ? "?bypassDNA=true" : ""
-          }`
-        );
+  let selectedElements = {};
+
+  _layers.forEach((layer, index) => {
+    let availableElements = [...layer.elements]; // Start with all elements
+    const layerName = layer.name.toLowerCase();
+    // Apply filters based on previous selections
+    if (index > 0) {
+      const prevSelections = randNum.slice(0, index).map(dna => {
+        const [id, filename] = dna.split(':');
+        return filename.split('?')[0]; // Remove query strings
+      });
+
+      if (layerName === "head") {
+        const jersey = prevSelections[1].replace(".png", "").split("#").shift();
+        const jerseyKey = jersey.slice(0, -1);
+        const mappedJersey = countryShortToLong(jerseyKey) || jerseyKey;
+        console.log(`Head layer filtering - Jersey: ${jerseyKey}, Mapped Jersey: ${mappedJersey}`);
+        
+        const removedElements = [];
+        availableElements = availableElements.filter(e => {
+          if (e.name.startsWith("bandana_")) {
+            const match = e.name === `bandana_${mappedJersey}`;
+            if (!match) {
+              removedElements.push(e.name);
+            } else {
+              console.log(`Matched bandana for ${mappedJersey}: ${e.name}`);
+            }
+            return match;
+          }
+          if (e.name.startsWith("piluso_")) {
+            const match = e.name === `piluso_${mappedJersey}`;
+            if (!match) {
+              removedElements.push(e.name);
+            } else {
+              console.log(`Matched piluso for ${mappedJersey}: ${e.name}`);
+            }
+            return match;
+          }
+          return true;
+        });
+        
+        if (removedElements.length > 0) {
+          console.log(`Head layer: Removed elements that don't match jersey ${mappedJersey}:`, removedElements);
+        }
+        console.log(`Available head elements after filtering: ${availableElements.length}`);
+      }
+
+      if (layerName === "eyes") {
+        const jersey = prevSelections[1].replace(".png", "").split("#").shift();
+        const jerseyKey = jersey.slice(0, -1);
+        const head = prevSelections[2].replace(".png", "").split("#").shift();
+        const headHasBlackHair = head.startsWith("bandana_") || head.startsWith("piluso_");
+        const hairColor = headHasBlackHair ? "negro" : HEAD_TO_HAIR_COLOR_MAP[head];
+
+        console.log(`Eyes layer filtering - Jersey: ${jerseyKey}, Head: ${head}`);
+
+        if (jerseyKey === "jap" || jerseyKey === "ks") {
+          console.log(`Eyes layer: Boosting weights for ${jerseyKey} jersey by 50x`);
+          availableElements = availableElements.map(e => {
+            console.log(`Boosting weight for ${e.name} from ${e.weight} to ${e.weight * 50}`);
+            return {
+              ...e,
+              weight: e.name.startsWith("oriental_") ? e.weight * 50 : e.weight
+            };
+          });
+          console.log(`Finished boosting weights for ${jerseyKey} jersey`);
+        }
+        
+        if (head === "pasamontana") {
+          console.log(`Applying pasamontana-specific eyes filtering`);
+          const validEyeTypes = ["blancos", "enojado", "morado", "regulares", "rojos", "sospecha1", "sospecha2"];
+          availableElements = availableElements.filter(e => {
+            const eyeName = e.name;
+            const isValid = validEyeTypes.some(type => eyeName.startsWith(type));
+            if (!isValid) {
+              console.log(`Filtered out eyes ${e.name} for pasamontana head`);
+            }
+            return isValid;
+          });
+          console.log(`Available eye elements after pasamontana filtering: ${availableElements.length}`);
+        }
+
+        if (hairColor) {
+          const removedElements = [];
+          availableElements = availableElements.filter(e => {
+            const eyeName = e.name;
+            const eyeParts = eyeName.split('_');
+            const lastPart = eyeParts[eyeParts.length - 1];
+            const isValid = !["negro", "castano", "rubio"].includes(lastPart) || lastPart === hairColor;
+            if (!isValid) {
+              removedElements.push(e.name);
+              console.log(`Filtered out eyes ${e.name} due to hair color mismatch`);
+            }
+            return isValid;
+          });
+          if (removedElements.length > 0) {
+            console.log(`Eyes layer: Removed elements with mismatched hair color:`, removedElements);
+          }
+          console.log(`Available eyes elements after hair color filtering: ${availableElements.length}`);
+        }
+      }
+
+      if (layerName === "mouth") {
+        const eyes = prevSelections[3].replace(".png", "").split("#").shift(); // Eyes is at index 3
+        const head = prevSelections[2].replace(".png", "").split("#").shift(); // Head is at index 2
+        const hairColor = eyes.split("_").pop();
+
+        console.log(`Mouth layer filtering - Eyes: ${eyes}, Head: ${head}, Hair Color: ${hairColor || 'none'}`);
+
+        if (eyes.startsWith("laser_")) {
+          availableElements = availableElements.filter(e => {
+            const mouthName = e.name.slice(0, -4);
+            return !mouthName.startsWith("fumando_");
+          });
+        }
+
+        if (head === "pasamontana") {
+          console.log(`Applying pasamontana-specific mouth filtering`);
+          const validMouthTypes = ["triste", "regular", "fuerza", "fumando_cigarro", "fumando_porro"];
+          availableElements = availableElements.filter(e => {
+            const mouthName = e.name;
+            const isValid = validMouthTypes.includes(mouthName);
+            if (!isValid) {
+              console.log(`Filtered out mouth ${e.name} for pasamontana head`);
+            }
+            return isValid;
+          });
+          console.log(`Available mouth elements after pasamontana filtering: ${availableElements.length}`);
+        }
+        
+        if (hairColor) {
+          console.log(`Mouth layer filtering - Hair Color: ${hairColor}`);
+          const removedElements = [];
+          availableElements = availableElements.filter(e => {
+            const mouthName = e.name;
+            const mouthParts = mouthName.split('_');
+            const lastPart = mouthParts[mouthParts.length - 1];
+            const isValid = !["negro", "castano", "rubio"].includes(lastPart) || lastPart === hairColor;
+            if (!isValid) {
+              removedElements.push(e.name);
+              console.log(`Filtered out mouth ${e.name} due to hair color mismatch`);
+            }
+            return isValid;
+          });
+          console.log(`Available mouth elements after hair color filtering: ${availableElements.length}`);
+        }
+      }
+
+      if (layerName === "object") {
+        const jersey = prevSelections[1].replace(".png", "").split("#").shift(); // Jersey is at index 1
+        const jerseyKey = jersey.slice(0, -1); // Remove skin color digit
+
+        if (!WORLD_CUP_CHAMPIONS.includes(jerseyKey)) {
+          console.log(`Object layer: Removed worldcup.png because ${jerseyKey} is not a World Cup champion`);
+          availableElements = availableElements.filter(e => e.name !== "worldcup");
+        }
+
+        if (!MATE_DRINKERS.includes(jerseyKey)) {
+          console.log(`Object layer: Removed mate.png because ${jerseyKey} is not a mate drinker`);
+          availableElements = availableElements.filter(e => e.name !== "mate");
+        }
       }
     }
+
+    // Calculate total weight of remaining elements
+    var totalWeight = 0;
+    availableElements.forEach((element) => {
+      totalWeight += element.weight;
+    });
+
+    // If no elements are available, fallback to a default or skip (adjust as needed)
+    if (totalWeight === 0) {
+      console.warn(`No valid elements for layer ${layer.name} with current selections`);
+      randNum.push(`${layer.elements[0].id}:${layer.elements[0].filename}${layer.bypassDNA ? "?bypassDNA=true" : ""}`);
+      return;
+    }
+
+    // Select an element based on weight
+    let random = Math.floor(Math.random() * totalWeight);
+    for (var i = 0; i < availableElements.length; i++) {
+      random -= availableElements[i].weight;
+      if (random < 0) {
+        const dnaEntry = `${availableElements[i].id}:${availableElements[i].filename}${layer.bypassDNA ? "?bypassDNA=true" : ""}`;
+        randNum.push(dnaEntry);
+        selectedElements[layerName] = availableElements[i];
+        return;
+      }
+    }
+
+    // Fallback in case loop fails (shouldn't happen with proper weights)
+    const fallback = availableElements[0];
+    randNum.push(`${fallback.id}:${fallback.filename}${layer.bypassDNA ? "?bypassDNA=true" : ""}`);
+    selectedElements[layerName] = fallback;
   });
+
   return randNum.join(DNA_DELIMITER);
 };
 
@@ -336,11 +607,11 @@ function shuffle(array) {
 
 const startCreating = async () => {
   let layerConfigIndex = 0;
-  let editionCount = 1;
+  let editionCount = 0;
   let failedCount = 0;
   let abstractedIndexes = [];
   for (
-    let i = network == NETWORK.sol ? 0 : 1;
+    let i = 0;
     i <= layerConfigurations[layerConfigurations.length - 1].growEditionSizeTo;
     i++
   ) {
@@ -359,10 +630,13 @@ const startCreating = async () => {
     while (
       editionCount <= layerConfigurations[layerConfigIndex].growEditionSizeTo
     ) {
-      let newDna = createDna(layers);
+      let newDna = VIP_DNA[editionCount] || createDna(layers);
+      console.log(`Creating edition ${editionCount} with DNA: ${newDna}`);
       if (isDnaUnique(dnaList, newDna)) {
-        let results = constructLayerToDna(newDna, layers);
+        let [updatedDna, results] = constructLayerToDna(newDna, layers);
         let loadedElements = [];
+
+        newDna = updatedDna;
 
         results.forEach((layer) => {
           loadedElements.push(loadLayerImg(layer));

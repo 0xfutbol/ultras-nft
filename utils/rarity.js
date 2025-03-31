@@ -3,17 +3,22 @@ const fs = require("fs");
 const layersDir = `${basePath}/layers`;
 
 const { layerConfigurations } = require(`${basePath}/src/config.js`);
-
 const { getElements } = require("../src/main.js");
 
-// read json data
-let rawdata = fs.readFileSync(`${basePath}/build/json/_metadata.json`);
-let data = JSON.parse(rawdata);
+// Read all JSON files from build/json directory
+const jsonDir = `${basePath}/build/json`;
+let data = [];
+const files = fs.readdirSync(jsonDir).filter(file => file.endsWith('.json'));
+files.forEach(file => {
+  const rawdata = fs.readFileSync(`${jsonDir}/${file}`);
+  const parsedData = JSON.parse(rawdata);
+  data.push(parsedData);
+});
 let editionSize = data.length;
 
-let rarityData = [];
+let rarityData = {};
 
-// intialize layers to chart
+// Initialize layers to chart
 layerConfigurations.forEach((config) => {
   let layers = config.layersOrder;
 
@@ -35,31 +40,35 @@ layerConfigurations.forEach((config) => {
         ? layer.options?.["displayName"]
         : layer.name;
     // don't include duplicate layers
-    if (!rarityData.includes(layer.name)) {
+    if (!rarityData[layerName]) {
       // add elements for each layer to chart
       rarityData[layerName] = elementsForLayer;
     }
   });
 });
 
-// fill up rarity chart with occurrences from metadata
+// Fill up rarity chart with occurrences from metadata
 data.forEach((element) => {
   let attributes = element.attributes;
   attributes.forEach((attribute) => {
     let traitType = attribute.trait_type;
     let value = attribute.value;
 
-    let rarityDataTraits = rarityData[traitType];
-    rarityDataTraits.forEach((rarityDataTrait) => {
-      if (rarityDataTrait.trait == value) {
-        // keep track of occurrences
-        rarityDataTrait.occurrence++;
-      }
-    });
+    if (rarityData[traitType]) {
+      let rarityDataTraits = rarityData[traitType];
+      rarityDataTraits.forEach((rarityDataTrait) => {
+        if (rarityDataTrait.trait === value) {
+          // keep track of occurrences
+          rarityDataTrait.occurrence++;
+        }
+      });
+    } else {
+      console.warn(`Warning: Trait type '${traitType}' not found in layer configurations.`);
+    }
   });
 });
 
-// convert occurrences to occurence string
+// Convert occurrences to occurrence string
 for (var layer in rarityData) {
   for (var attribute in rarityData[layer]) {
     // get chance
@@ -72,7 +81,7 @@ for (var layer in rarityData) {
   }
 }
 
-// print out rarity data
+// Print out rarity data
 for (var layer in rarityData) {
   console.log(`Trait type: ${layer}`);
   for (var trait in rarityData[layer]) {

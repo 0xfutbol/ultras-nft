@@ -1,0 +1,262 @@
+
+> hashlips_art_engine@1.1.1 rarity /home/GitHub/hashlips_art_engine
+> node utils/rarity.js
+
+Trait type: Background
+{ trait: 'Blue', occurrence: '561 in 5698 (9.85 %)' }
+{ trait: 'Celeste', occurrence: '563 in 5698 (9.88 %)' }
+{ trait: 'Cyan', occurrence: '567 in 5698 (9.95 %)' }
+{ trait: 'Green', occurrence: '561 in 5698 (9.85 %)' }
+{ trait: 'Lime', occurrence: '584 in 5698 (10.25 %)' }
+{ trait: 'Orange', occurrence: '591 in 5698 (10.37 %)' }
+{ trait: 'Pink', occurrence: '579 in 5698 (10.16 %)' }
+{ trait: 'Purple', occurrence: '566 in 5698 (9.93 %)' }
+{ trait: 'Red', occurrence: '518 in 5698 (9.09 %)' }
+{ trait: 'Yellow', occurrence: '608 in 5698 (10.67 %)' }
+
+Trait type: Eyes
+{ trait: 'Angry', occurrence: '626 in 5698 (10.99 %)' }
+{ trait: 'Blue Laser', occurrence: '41 in 5698 (0.72 %)' }
+{ trait: 'Fútbol Goggles', occurrence: '546 in 5698 (9.58 %)' }
+{ trait: 'Green Laser', occurrence: '39 in 5698 (0.68 %)' }
+{ trait: 'Oriental', occurrence: '125 in 5698 (2.19 %)' }
+{ trait: 'Pink Laser', occurrence: '36 in 5698 (0.63 %)' }
+{ trait: 'Pixel Glasses', occurrence: '550 in 5698 (9.65 %)' }
+{ trait: 'Purple Eye', occurrence: '517 in 5698 (9.07 %)' }
+{ trait: 'Red Laser', occurrence: '80 in 5698 (1.40 %)' }
+{ trait: 'Regular Eyes', occurrence: '942 in 5698 (16.53 %)' }
+{ trait: 'Sunglasses', occurrence: '579 in 5698 (10.16 %)' }
+{ trait: 'Suspicious Eyes (Left)', occurrence: '338 in 5698 (5.93 %)' }
+{
+  trait: 'Suspicious Eyes (Right)',
+  occurrence: '347 in 5698 (6.09 %)'
+}
+{ trait: 'Wasted', occurrence: '469 in 5698 (8.23 %)' }
+{ trait: 'Whites', occurrence: '419 in 5698 (7.35 %)' }
+{ trait: 'Yellow Laser', occurrence: '44 in 5698 (0.77 %)' }
+
+Trait type: Head
+{ trait: 'Afro / Black', occurrence: '116 in 5698 (2.04 %)' }
+{ trait: 'Afro / Brown', occurrence: '101 in 5698 (1.77 %)' }
+{ trait: 'Afro / Chestnut', occurrence: '101 in 5698 (1.77 %)' }
+{ trait: 'Afro / Purple', occurrence: '94 in 5698 (1.65 %)' }
+{ trait: 'Avatar', occurrence: '59 in 5698 (1.04 %)' }
+{ trait: 'Balaclava', occurrence: '326 in 5698 (5.72 %)' }
+{ trait: 'Bald', occurrence: '340 in 5698 (5.97 %)' }
+{ trait: 'Bandana Argentina', occurrence: '16 in 5698 (0.28 %)' }
+{ trait: 'Bandana Belgium', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Bandana Brazil', occurrence: '19 in 5698 (0.33 %)' }
+{ trait: 'Bandana Canada', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Bandana Colombia', occurrence: '4 in 5698 (0.07 %)' }
+{ trait: 'Bandana England', occurrence: '17 in 5698 (0.30 %)' }
+{ trait: 'Bandana France', occurrence: '18 in 5698 (0.32 %)' }
+{ trait: 'Bandana Germany', occurrence: '16 in 5698 (0.28 %)' }
+{ trait: 'Bandana Italy', occurrence: '9 in 5698 (0.16 %)' }
+{ trait: 'Bandana Japan', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Bandana Mexico', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Bandana Netherlands', occurrence: '11 in 5698 (0.19 %)' }
+{ trait: 'Bandana Nigeria', occurrence: '14 in 5698 (0.25 %)' }
+{ trait: 'Bandana Peru', occurrence: '11 in 5698 (0.19 %)' }
+{ trait: 'Bandana Portugal', occurrence: '13 in 5698 (0.23 %)' }
+{ trait: 'Bandana Russia', occurrence: '6 in 5698 (0.11 %)' }
+{ trait: 'Bandana San Marino', occurrence: '4 in 5698 (0.07 %)' }
+{ trait: 'Bandana Slovakia', occurrence: '3 in 5698 (0.05 %)' }
+{ trait: 'Bandana Slovenia', occurrence: '5 in 5698 (0.09 %)' }
+{ trait: 'Bandana South Korea', occurrence: '13 in 5698 (0.23 %)' }
+{ trait: 'Bandana Spain', occurrence: '15 in 5698 (0.26 %)' }
+{ trait: 'Bandana Sweden', occurrence: '6 in 5698 (0.11 %)' }
+{ trait: 'Bandana Switzerland', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Bandana Turkey', occurrence: '12 in 5698 (0.21 %)' }
+{ trait: 'Bandana United States', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Bandana Uruguay', occurrence: '14 in 5698 (0.25 %)' }
+{ trait: 'Bandana Venezuela', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Buzz Cut / Black', occurrence: '192 in 5698 (3.37 %)' }
+{ trait: 'Buzz Cut / Blonde', occurrence: '199 in 5698 (3.49 %)' }
+{ trait: 'Buzz Cut / Brown', occurrence: '199 in 5698 (3.49 %)' }
+{ trait: 'Buzz Cut / Purple', occurrence: '208 in 5698 (3.65 %)' }
+{ trait: 'Cap / Black', occurrence: '87 in 5698 (1.53 %)' }
+{ trait: 'Cap / Black & White', occurrence: '90 in 5698 (1.58 %)' }
+{ trait: 'Cap / Gray', occurrence: '82 in 5698 (1.44 %)' }
+{ trait: 'Cap / White', occurrence: '106 in 5698 (1.86 %)' }
+{ trait: 'Crown', occurrence: '37 in 5698 (0.65 %)' }
+{ trait: 'Curly / Black', occurrence: '125 in 5698 (2.19 %)' }
+{ trait: 'Curly / Brown', occurrence: '134 in 5698 (2.35 %)' }
+{ trait: 'Curly / Orange', occurrence: '144 in 5698 (2.53 %)' }
+{ trait: 'Curly / Red', occurrence: '133 in 5698 (2.33 %)' }
+{ trait: 'Piluso Argentina', occurrence: '17 in 5698 (0.30 %)' }
+{ trait: 'Piluso Belgium', occurrence: '9 in 5698 (0.16 %)' }
+{ trait: 'Piluso Brazil', occurrence: '13 in 5698 (0.23 %)' }
+{ trait: 'Piluso Canada', occurrence: '8 in 5698 (0.14 %)' }
+{ trait: 'Piluso Colombia', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Piluso England', occurrence: '11 in 5698 (0.19 %)' }
+{ trait: 'Piluso France', occurrence: '14 in 5698 (0.25 %)' }
+{ trait: 'Piluso Germany', occurrence: '11 in 5698 (0.19 %)' }
+{ trait: 'Piluso Italy', occurrence: '20 in 5698 (0.35 %)' }
+{ trait: 'Piluso Japan', occurrence: '6 in 5698 (0.11 %)' }
+{ trait: 'Piluso Mexico', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Piluso Netherlands', occurrence: '18 in 5698 (0.32 %)' }
+{ trait: 'Piluso Nigeria', occurrence: '7 in 5698 (0.12 %)' }
+{ trait: 'Piluso Peru', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Piluso Portugal', occurrence: '13 in 5698 (0.23 %)' }
+{ trait: 'Piluso Russia', occurrence: '6 in 5698 (0.11 %)' }
+{ trait: 'Piluso San Marino', occurrence: '5 in 5698 (0.09 %)' }
+{ trait: 'Piluso Slovakia', occurrence: '3 in 5698 (0.05 %)' }
+{ trait: 'Piluso Slovenia', occurrence: '2 in 5698 (0.04 %)' }
+{ trait: 'Piluso South Korea', occurrence: '5 in 5698 (0.09 %)' }
+{ trait: 'Piluso Spain', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Piluso Sweden', occurrence: '3 in 5698 (0.05 %)' }
+{ trait: 'Piluso Switzerland', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Piluso Turkey', occurrence: '16 in 5698 (0.28 %)' }
+{ trait: 'Piluso United States', occurrence: '13 in 5698 (0.23 %)' }
+{ trait: 'Piluso Uruguay', occurrence: '4 in 5698 (0.07 %)' }
+{ trait: 'Piluso Venezuela', occurrence: '10 in 5698 (0.18 %)' }
+{ trait: 'Punk / Blonde', occurrence: '128 in 5698 (2.25 %)' }
+{ trait: 'Punk / Blue', occurrence: '119 in 5698 (2.09 %)' }
+{ trait: 'Punk / Brown', occurrence: '112 in 5698 (1.97 %)' }
+{ trait: 'Punk / Green', occurrence: '111 in 5698 (1.95 %)' }
+{ trait: 'Punk / Pink', occurrence: '89 in 5698 (1.56 %)' }
+{ trait: 'Punk / Red', occurrence: '112 in 5698 (1.97 %)' }
+{ trait: 'Slicked-Back / Black', occurrence: '143 in 5698 (2.51 %)' }
+{ trait: 'Slicked-Back / Blonde', occurrence: '135 in 5698 (2.37 %)' }
+{ trait: 'Slicked-Back / Brown', occurrence: '142 in 5698 (2.49 %)' }
+{ trait: 'Slicked-Back / Green', occurrence: '129 in 5698 (2.26 %)' }
+{ trait: 'Straight / Black', occurrence: '126 in 5698 (2.21 %)' }
+{ trait: 'Straight / Blonde', occurrence: '145 in 5698 (2.54 %)' }
+{ trait: 'Straight / Green', occurrence: '131 in 5698 (2.30 %)' }
+{ trait: 'Straight / Pink', occurrence: '150 in 5698 (2.63 %)' }
+{ trait: 'Tuft / Black / Yellow', occurrence: '94 in 5698 (1.65 %)' }
+{ trait: 'Tuft / Cyan / Yellow', occurrence: '86 in 5698 (1.51 %)' }
+{
+  trait: 'Tuft / Green / Dark Yellow',
+  occurrence: '89 in 5698 (1.56 %)'
+}
+{ trait: 'Tuft / Pink / Cyan', occurrence: '71 in 5698 (1.25 %)' }
+{ trait: 'Tuft / Purple / Green', occurrence: '84 in 5698 (1.47 %)' }
+{ trait: 'Tuft / Red / Blue', occurrence: '87 in 5698 (1.53 %)' }
+
+Trait type: Jersey
+{ trait: '0xFútbol', occurrence: '61 in 5698 (1.07 %)' }
+{ trait: 'Ajax', occurrence: '65 in 5698 (1.14 %)' }
+{ trait: 'Al Nassr', occurrence: '63 in 5698 (1.11 %)' }
+{ trait: 'Argentina', occurrence: '181 in 5698 (3.18 %)' }
+{ trait: 'Arsenal', occurrence: '101 in 5698 (1.77 %)' }
+{ trait: 'Atlético Madrid', occurrence: '42 in 5698 (0.74 %)' }
+{ trait: 'Atlético Mineiro', occurrence: '46 in 5698 (0.81 %)' }
+{ trait: 'Balzers', occurrence: '14 in 5698 (0.25 %)' }
+{ trait: 'Barcelona', occurrence: '121 in 5698 (2.12 %)' }
+{ trait: 'Bayern Munich', occurrence: '109 in 5698 (1.91 %)' }
+{ trait: 'Belgium', occurrence: '57 in 5698 (1.00 %)' }
+{ trait: 'Benfica', occurrence: '92 in 5698 (1.61 %)' }
+{ trait: 'Boca Juniors', occurrence: '107 in 5698 (1.88 %)' }
+{ trait: 'Borussia Dortmund', occurrence: '83 in 5698 (1.46 %)' }
+{ trait: 'Brazil', occurrence: '166 in 5698 (2.91 %)' }
+{ trait: 'Canada', occurrence: '72 in 5698 (1.26 %)' }
+{ trait: 'Chelsea', occurrence: '83 in 5698 (1.46 %)' }
+{ trait: 'Colombia', occurrence: '100 in 5698 (1.76 %)' }
+{ trait: 'Corinthians', occurrence: '52 in 5698 (0.91 %)' }
+{ trait: 'Croatia', occurrence: '59 in 5698 (1.04 %)' }
+{ trait: 'Cruzeiro', occurrence: '46 in 5698 (0.81 %)' }
+{ trait: 'England', occurrence: '138 in 5698 (2.42 %)' }
+{ trait: 'Fenerbahçe', occurrence: '65 in 5698 (1.14 %)' }
+{ trait: 'Flamengo', occurrence: '68 in 5698 (1.19 %)' }
+{ trait: 'Fluminense', occurrence: '43 in 5698 (0.75 %)' }
+{ trait: 'France', occurrence: '150 in 5698 (2.63 %)' }
+{ trait: 'Galatasaray', occurrence: '72 in 5698 (1.26 %)' }
+{ trait: 'Germany', occurrence: '124 in 5698 (2.18 %)' }
+{ trait: 'Grêmio', occurrence: '54 in 5698 (0.95 %)' }
+{ trait: 'Inter', occurrence: '89 in 5698 (1.56 %)' }
+{ trait: 'Inter Miami', occurrence: '83 in 5698 (1.46 %)' }
+{ trait: 'Internacional', occurrence: '51 in 5698 (0.90 %)' }
+{ trait: 'Italy', occurrence: '152 in 5698 (2.67 %)' }
+{ trait: 'Japan', occurrence: '74 in 5698 (1.30 %)' }
+{ trait: 'Juventus', occurrence: '122 in 5698 (2.14 %)' }
+{ trait: 'Liverpool', occurrence: '104 in 5698 (1.83 %)' }
+{ trait: 'Manchester City', occurrence: '98 in 5698 (1.72 %)' }
+{ trait: 'Manchester United', occurrence: '128 in 5698 (2.25 %)' }
+{ trait: 'Meta Soccer / 2nd Kit', occurrence: '62 in 5698 (1.09 %)' }
+{ trait: 'MetaSoccer', occurrence: '60 in 5698 (1.05 %)' }
+{ trait: 'Mexico', occurrence: '87 in 5698 (1.53 %)' }
+{ trait: 'Milan', occurrence: '106 in 5698 (1.86 %)' }
+{ trait: 'Nacional', occurrence: '44 in 5698 (0.77 %)' }
+{ trait: 'Netherlands', occurrence: '101 in 5698 (1.77 %)' }
+{ trait: 'Nigeria', occurrence: '86 in 5698 (1.51 %)' }
+{ trait: 'Palmeiras', occurrence: '55 in 5698 (0.97 %)' }
+{ trait: 'Paris Saint-Germain', occurrence: '117 in 5698 (2.05 %)' }
+{ trait: 'Peñarol', occurrence: '49 in 5698 (0.86 %)' }
+{ trait: 'Peru', occurrence: '81 in 5698 (1.42 %)' }
+{ trait: 'Porto', occurrence: '70 in 5698 (1.23 %)' }
+{ trait: 'Portugal', occurrence: '132 in 5698 (2.32 %)' }
+{ trait: 'Real Madrid', occurrence: '99 in 5698 (1.74 %)' }
+{ trait: 'Real Sociedad', occurrence: '29 in 5698 (0.51 %)' }
+{ trait: 'River Plate', occurrence: '109 in 5698 (1.91 %)' }
+{ trait: 'Russia', occurrence: '88 in 5698 (1.54 %)' }
+{ trait: 'San Marino', occurrence: '25 in 5698 (0.44 %)' }
+{ trait: 'Santos', occurrence: '47 in 5698 (0.82 %)' }
+{ trait: 'São Paulo', occurrence: '33 in 5698 (0.58 %)' }
+{ trait: 'Slovakia', occurrence: '23 in 5698 (0.40 %)' }
+{ trait: 'Slovenia', occurrence: '34 in 5698 (0.60 %)' }
+{ trait: 'South Korea', occurrence: '82 in 5698 (1.44 %)' }
+{ trait: 'Spain', occurrence: '119 in 5698 (2.09 %)' }
+{ trait: 'Sweden', occurrence: '62 in 5698 (1.09 %)' }
+{ trait: 'Switzerland', occurrence: '74 in 5698 (1.30 %)' }
+{ trait: 'Turkey', occurrence: '98 in 5698 (1.72 %)' }
+{ trait: 'United States', occurrence: '118 in 5698 (2.07 %)' }
+{ trait: 'Uruguay', occurrence: '123 in 5698 (2.16 %)' }
+{ trait: 'Vasco da Gama', occurrence: '52 in 5698 (0.91 %)' }
+{ trait: 'Venezuela', occurrence: '98 in 5698 (1.72 %)' }
+
+Trait type: Mouth
+{ trait: '420', occurrence: '541 in 5698 (9.49 %)' }
+{ trait: '420 / Van Dyke Beard', occurrence: '69 in 5698 (1.21 %)' }
+{ trait: 'Covered', occurrence: '360 in 5698 (6.32 %)' }
+{ trait: 'Happy', occurrence: '542 in 5698 (9.51 %)' }
+{ trait: 'Happy / Goatee Beard', occurrence: '62 in 5698 (1.09 %)' }
+{ trait: 'Neutral', occurrence: '596 in 5698 (10.46 %)' }
+{ trait: 'Rage', occurrence: '596 in 5698 (10.46 %)' }
+{ trait: 'Rage / Van Dyke Beard', occurrence: '61 in 5698 (1.07 %)' }
+{
+  trait: 'Regular / Van Dyke Beard',
+  occurrence: '57 in 5698 (1.00 %)'
+}
+{ trait: 'Sad', occurrence: '553 in 5698 (9.71 %)' }
+{ trait: 'Sad / Van Dyke Beard', occurrence: '56 in 5698 (0.98 %)' }
+{ trait: 'Shouting', occurrence: '504 in 5698 (8.85 %)' }
+{ trait: 'Shouting / Goatee Beard', occurrence: '62 in 5698 (1.09 %)' }
+{ trait: 'Smoking Cigarette', occurrence: '586 in 5698 (10.28 %)' }
+{
+  trait: 'Smoking Cigarette / Van Dyke Beard',
+  occurrence: '55 in 5698 (0.97 %)'
+}
+{ trait: 'Toothless', occurrence: '280 in 5698 (4.91 %)' }
+{
+  trait: 'Toothless / Goatee Beard',
+  occurrence: '27 in 5698 (0.47 %)'
+}
+{ trait: 'Whistling', occurrence: '691 in 5698 (12.13 %)' }
+
+Trait type: Object
+{ trait: 'Ball / Regular', occurrence: '173 in 5698 (3.04 %)' }
+{ trait: 'Ball / Tango 78', occurrence: '165 in 5698 (2.90 %)' }
+{ trait: 'Ball / UEFA', occurrence: '173 in 5698 (3.04 %)' }
+{ trait: 'Ball / Vintage', occurrence: '197 in 5698 (3.46 %)' }
+{ trait: 'Beer', occurrence: '596 in 5698 (10.46 %)' }
+{ trait: 'Foam Finger / Blue', occurrence: '157 in 5698 (2.76 %)' }
+{ trait: 'Foam Finger / Green', occurrence: '143 in 5698 (2.51 %)' }
+{ trait: 'Foam Finger / Red', occurrence: '147 in 5698 (2.58 %)' }
+{ trait: 'Foam Finger / Yellow', occurrence: '180 in 5698 (3.16 %)' }
+{ trait: "Goalkeeper's Glove", occurrence: '646 in 5698 (11.34 %)' }
+{ trait: 'Mate', occurrence: '28 in 5698 (0.49 %)' }
+{ trait: 'Red Card', occurrence: '651 in 5698 (11.43 %)' }
+{ trait: 'Red Cup', occurrence: '613 in 5698 (10.76 %)' }
+{ trait: 'Vuvuzela', occurrence: '751 in 5698 (13.18 %)' }
+{ trait: 'World Cup', occurrence: '47 in 5698 (0.82 %)' }
+{ trait: 'Yellow Card', occurrence: '666 in 5698 (11.69 %)' }
+
+Trait type: Skin
+{ trait: 'Skin Tone 1', occurrence: '1397 in 5698 (24.52 %)' }
+{ trait: 'Skin Tone 2', occurrence: '1781 in 5698 (31.26 %)' }
+{ trait: 'Skin Tone 3', occurrence: '1434 in 5698 (25.17 %)' }
+{ trait: 'Skin Tone 4', occurrence: '666 in 5698 (11.69 %)' }
+{ trait: 'Skin Tone 5', occurrence: '268 in 5698 (4.70 %)' }
+{ trait: 'Skin Tone 6', occurrence: '152 in 5698 (2.67 %)' }
+
